@@ -11,11 +11,14 @@
     "react-lazy-load": "^3.0.13",
     "react-scripts": "3.0.1"
   },
+  "homepage": "https://costaslavich.github.io/goit-react-hw-03-image-finder/build/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
