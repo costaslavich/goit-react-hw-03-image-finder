@@ -8,7 +8,10 @@ const Gallery = ({ pictures, openModal }) => (
     <ul className={styles.gallery}>
       {pictures.map(picture => (
         <li key={picture.id} className={styles.gallery_item}>
-          <PhotoCard {...picture} openModal={() => openModal(picture.id)} />
+          <PhotoCard
+            {...picture}
+            openModal={() => openModal(picture.largeImageURL)}
+          />
         </li>
       ))}
     </ul>

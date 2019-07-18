@@ -44,9 +44,9 @@ export default class Modal extends Component {
       <div
         className={styles.overlay}
         ref={this.backdropRef}
-        onClick={this.handleBackDropClick}
+        onClickCapture={this.handleBackDropClick}
         role="img"
-        onKeyDown={this.handleKeyPress}
+        onKeyDownCapture={this.handleKeyPress}
       >
         <div className={styles.modal}>
           <img src={largeImage} alt="random-img" />

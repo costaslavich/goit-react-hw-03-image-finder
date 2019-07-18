@@ -29,7 +29,7 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.fetchPicture({ query: 'alexander', pageNumber: 1 });
+    this.fetchPicture({ query: '1', pageNumber: 1 });
   }
 
   componentDidUpdate(prevState) {
@@ -68,14 +68,14 @@ export default class App extends Component {
       .then(({ data }) => {
         this.setState(prevState => ({
           pictures: [...prevState.pictures, ...mapperHelper(data.hits)],
-          pageNumber: prevState.pageNumber + 2,
+          pageNumber: prevState.pageNumber + 1,
         }));
       })
       .catch(error => this.setState({ error }));
   };
 
-  openModal = () => {
-    this.setState({ isModalOpen: true });
+  openModal = id => {
+    this.setState({ isModalOpen: true, largeImageURL: id });
   };
 
   closeModal = () => {

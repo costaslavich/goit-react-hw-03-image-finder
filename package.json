@@ -5,13 +5,14 @@
   "dependencies": {
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-content-loader": "^4.2.1",
     "react-dom": "^16.8.6",
     "react-lazy-load": "^3.0.13",
     "react-scripts": "3.0.1"
   },
-  "homepage": "https://costaslavich.github.io/goit-react-hw-03-image-finder/build/",
+  "homepage": "https://costaslavich.github.io/goit-react-hw-03-image-finder/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
