@@ -29,7 +29,7 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.fetchPicture({ query: '1', pageNumber: 1 });
+    this.fetchPicture({ query: '', pageNumber: 1 });
   }
 
   componentDidUpdate(prevState) {
@@ -43,15 +43,21 @@ export default class App extends Component {
     }
   }
 
-  fetchPicture = ({ query, pageNumber }) => {
+  onSearchForm = value => {
+    this.setState({ query: value, pictures: [] }, () => {
+      this.fetchPicture(value);
+    });
+  };
+
+  fetchPicture = query => {
     this.setState({ isLoading: true });
 
-    fetchPictures(query, pageNumber)
+    fetchPictures(query, 1)
       .then(({ data }) => {
-        this.setState({
-          pictures: mapperHelper(data.hits),
-          pageNumber: pageNumber + 1,
-        });
+        this.setState(state => ({
+          pictures: data.hits,
+          pageNumber: state.pageNumber + 1,
+        }));
       })
       .catch(error => this.setState({ error }))
       .finally(() =>
@@ -66,9 +72,10 @@ export default class App extends Component {
 
     fetchPictures(query, pageNumber)
       .then(({ data }) => {
-        this.setState(prevState => ({
-          pictures: [...prevState.pictures, ...mapperHelper(data.hits)],
-          pageNumber: prevState.pageNumber + 1,
+        this.setState(state => ({
+          query,
+          pictures: [...state.pictures, ...mapperHelper(data.hits)],
+          pageNumber: state.pageNumber + 1,
         }));
       })
       .catch(error => this.setState({ error }));
@@ -98,7 +105,7 @@ export default class App extends Component {
 
     return (
       <div className={styles.app}>
-        <SearchForm onSubmit={this.fetchPicture} />
+        <SearchForm onSubmit={this.onSearchForm} />
         {isLoading && (
           <LazyLoad
             height={762}
