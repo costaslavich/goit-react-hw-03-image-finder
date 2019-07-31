@@ -29,7 +29,8 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.fetchPicture({ query: '', pageNumber: 1 });
+    const { query } = this.state;
+    this.fetchPicture(query);
   }
 
   componentDidUpdate(prevState) {
@@ -44,15 +45,22 @@ export default class App extends Component {
   }
 
   onSearchForm = value => {
-    this.setState({ query: value, pictures: [] }, () => {
-      this.fetchPicture(value);
-    });
+    this.setState(
+      {
+        query: value,
+        pictures: [],
+        pageNumber: 1,
+      },
+      () => {
+        this.fetchPicture(value);
+      },
+    );
   };
 
   fetchPicture = query => {
     this.setState({ isLoading: true });
 
-    fetchPictures(query, 1)
+    fetchPictures(query)
       .then(({ data }) => {
         this.setState(state => ({
           pictures: data.hits,
